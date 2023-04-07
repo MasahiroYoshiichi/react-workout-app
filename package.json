@@ -15,8 +15,7 @@
     "lint:fix": "npm run --silent lint:style:fix; npm run --silent lint:es:fix",
     "format": "prettier --write --loglevel=warn 'src/**/*.{js,jsx,ts,tsx,html,json,gql,graphql}'",
     "fix": "npm run --silent format; npm run --silent lint:fix",
-    "preinstall": "npx typesync || :",
-    "prepare": "npx simple-git-hooks || :"
+    "preinstall": "npx typesync || :"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.8",
@@ -69,20 +68,5 @@
     "typescript": "^4.8.2",
     "vite": "^3.0.9",
     "vite-tsconfig-paths": "^3.5.0"
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "prettier --write --loglevel=warn",
-      "eslint --fix --quiet"
-    ],
-    "src/**/*.{css,less,sass,scss}": [
-      "stylelint --fix --quiet"
-    ],
-    "src/**/*.{html,json,gql,graphql}": [
-      "prettier --write --loglevel=error"
-    ]
-  },
-  "simple-git-hooks": {
-    "pre-commit": ""
   }
 }

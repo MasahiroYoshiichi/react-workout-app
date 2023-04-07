@@ -1,8 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2022": true,
-    "jest/globals": true
+    "es2022": true
   },
   "extends": [
     "eslint:recommended",
@@ -13,7 +12,6 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "plugin:jest/recommended",
     "prettier"
   ],
   "parserOptions": {
@@ -26,7 +24,6 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "jest",
     "jsx-a11y",
     "react",
     "react-hooks"
@@ -139,22 +136,6 @@
       "rules": {
         "react/prop-types": "off"
       }
-    },
-    {
-      "files": [
-        "src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-        "src/**/*.{test,spec}.{js,jsx,ts,tsx}"
-      ],
-      "env": {
-        "jest/globals": true
-      },
-      "extends": [
-        "plugin:jest/recommended",
-        "plugin:jest/style"
-      ],
-      "plugins": [
-        "jest"
-      ]
     }
   ],
   "settings": {

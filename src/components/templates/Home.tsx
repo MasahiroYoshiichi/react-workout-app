@@ -1,15 +1,11 @@
-import type { FC } from "react";
-import "./Home.css";
+import type {FC} from "react";
+import Top from "../organisms/Top";
 // import Background from "*.ExprosiveWorkoutTop.jpeg";
 
 const Home: FC = () => {
-  return (
-    <>
-      <div className="top-page">
-        <h1 className="text-3xl font-bold underline">Exprosive Workout</h1>
-      </div>
-    </>
-  );
+    return (
+        <Top></Top>
+    );
 };
 
 export default Home;
