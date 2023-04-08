@@ -1,6 +1,5 @@
 import type {FC, PropsWithChildren} from "react";
 import {BrowserRouter as Router} from "react-router-dom";
-// import { ChakraProvider } from "@chakra-ui/react";
 import {HelmetProvider} from "react-helmet-async";
 import {SWRConfig} from "swr";
 
@@ -12,11 +11,9 @@ const swrOptions = {
 };
 const Index: FC<PropsWithChildren> = ({children}) => (
     <HelmetProvider>
-        {/* <ChakraProvider> */}
         <Router>
             <SWRConfig value={swrOptions}>{children}</SWRConfig>
         </Router>
-        {/* </ChakraProvider> */}
     </HelmetProvider>
 );
 

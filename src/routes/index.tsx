@@ -1,18 +1,24 @@
-import type { FC } from "react";
-import { Helmet } from "react-helmet-async";
+import type {FC} from "react";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Home from "components/templates/Home";
+import Course from "../components/templates/Course";
+import Event from "../components/templates/Event";
+import Login from "../components/templates/Login";
+import Signin from "../components/templates/Signin";
 
-const appTitle = import.meta.env.ExprosiveWoekout;
 
 const IndexRoutes: FC = () => {
-  return (
-    <>
-      <Helmet>
-        <title>{appTitle}</title>
-      </Helmet>
-      <Home />
-    </>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Home/>}></Route>
+            <Route path="course" element={<Course/>}></Route>
+            <Route path="event" element={<Event/>}></Route>
+            <Route path="login" element={<Login/>}></Route>
+            <Route path="signin" element={<Signin/>}></Route>
+            <Route path="*" element={<Navigate to="/" replace/>}/>
+        </Routes>
+
+    );
 };
 
 export default IndexRoutes;
