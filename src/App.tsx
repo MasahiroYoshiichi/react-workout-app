@@ -1,11 +1,11 @@
-import type { FC } from "react";
-import Providers from "./Providers";
+import type {FC} from "react";
+import Index from "./providers";
 import IndexRoutes from "./routes";
 
 const App: FC = () => (
-  <Providers>
-    <IndexRoutes />
-  </Providers>
+    <Index>
+        <IndexRoutes/>
+    </Index>
 );
 
 export default App;

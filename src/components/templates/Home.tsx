@@ -1,11 +1,15 @@
 import type {FC} from "react";
+import Header from "../molecules/Header";
 import Top from "../organisms/Top";
-// import Background from "*.ExprosiveWorkoutTop.jpeg";
 
 const Home: FC = () => {
     return (
-        <Top></Top>
-    );
+        <div className="w-screen h-screen">
+            <Header></Header>
+            <Top topTitle={"最高のワークアウトを全ての人へ"} buttonTitle={"Challenge Workout"}
+                 image={"url(/images/EXTop.png)"}></Top>
+        </div>
+    )
 };
 
 export default Home;

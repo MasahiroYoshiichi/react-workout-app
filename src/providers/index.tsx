@@ -10,7 +10,7 @@ const swrOptions = {
     dedupingInterval: 60000,
     shouldRetryOnError: false,
 };
-const Providers: FC<PropsWithChildren> = ({children}) => (
+const Index: FC<PropsWithChildren> = ({children}) => (
     <HelmetProvider>
         {/* <ChakraProvider> */}
         <Router>
@@ -20,4 +20,4 @@ const Providers: FC<PropsWithChildren> = ({children}) => (
     </HelmetProvider>
 );
 
-export default Providers;
+export default Index;
