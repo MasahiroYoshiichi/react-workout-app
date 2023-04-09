@@ -11,7 +11,7 @@ const Navber: FC<Prpps> = ({navTitle}) => {
             <div className="flex flex-row w-3/4 text-2xl pt-7 mr-10 justify-end">
                 {navTitle.map((title, index) => {
                     return <div className="px-4 text-white-500" key={index}>
-                        <Link to={{pathname: '/course',}}>
+                        <Link className="text-white hover:text-black" to={{pathname: '/course',}}>
                             {title}
                         </Link></div>
                 })}

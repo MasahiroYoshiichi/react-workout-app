@@ -6,7 +6,6 @@ import Top from "../organisms/Top";
 const appTitle = import.meta.env.ExprosiveWoekout;
 
 const Home: FC = () => {
-
     return (
         <div className="w-screen h-screen">
             <Helmet>{appTitle}</Helmet>
