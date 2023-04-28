@@ -17,8 +17,8 @@ const SelectCourse: FC = () => {
         return (
             <>
                 {courseID === 'athlete' ? <Athlete course={selectCourse} detailFlag={courseID}></Athlete> : undefined}
-                {courseID === 'exercise' ? <Exercise course={selectCourse}></Exercise> : undefined}
-                {courseID === 'fitness' ? <Fitness course={selectCourse}></Fitness> : undefined}
+                {courseID === 'exercise' ? <Exercise course={selectCourse} detailFlag={courseID}></Exercise> : undefined}
+                {courseID === 'fitness' ? <Fitness course={selectCourse} detailFlag={courseID}></Fitness> : undefined}
             </>
         );
     }

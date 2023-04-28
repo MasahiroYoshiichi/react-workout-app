@@ -11,7 +11,7 @@ const Home: FC = () => {
             <Helmet>{appTitle}</Helmet>
             <Header></Header>
             <Top topTitle={"Exprosive Workout"} buttonTitle={"最高のワークアウトを全ての人へ"}
-                 image={"url(images/EXTop.png)"}></Top>
+                 image={"url(images/top.jpg)"}></Top>
         </div>
     )
 };
