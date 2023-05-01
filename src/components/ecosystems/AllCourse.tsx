@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {courseDate} from 'date';
+import {courseData} from 'data';
 import {Helmet} from "react-helmet-async";
 import Athlete from "../organisms/Athlete";
 import Exercise from "../organisms/Exercise";
@@ -7,9 +7,9 @@ import Fitness from "../organisms/Fitness";
 
 
 const AllCourse: FC = () => {
-    const athlete = courseDate[0];
-    const exercise = courseDate[1];
-    const fitness = courseDate[2];
+    const athlete = courseData[0];
+    const exercise = courseData[1];
+    const fitness = courseData[2];
 
 
     return (

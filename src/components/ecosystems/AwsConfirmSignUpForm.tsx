@@ -1,40 +1,61 @@
 import type {FC} from "react";
 import {useState} from "react"
-import {useNavigate} from "react-router-dom";
 import {useProvideAuth} from "../../hooks/useAuth";
 
-const AwsConfirmSignUpForm: FC = () => {
+const VerificationForm: FC = () => {
     const auth = useProvideAuth();
-    const navigate = useNavigate();
     const [username, setUsername] = useState('');
-    const executeConfirmSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const result = await auth.confirmSignUp(username);
+    const [verificationCode, setVerificationCode] = useState('')
+    const handleResendCode = async () => {
+        const result = await auth.sendVerificationCode(username);
+
         if (result.success) {
-            navigate({pathname: '/signup'});
+            console.log('検証コードが再送されました。');
+            // 再送信後の処理をここに追加
         } else {
-            alert(result.message);
+            console.error(`検証コードの再送信に失敗しました: ${result.message}`);
+            // エラー処理をここに追加
+        }
+    };
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+
+        const result = await auth.confirmSignUp(verificationCode);
+
+        if (result.success) {
+            console.log('サインアップが確認されました。');
+            // サインアップ確認後の処理をここに追加
+        } else {
+            console.error(`サインアップの確認に失敗しました: ${result.message}`);
+            // エラー処理をここに追加
         }
     };
 
     return (
         <>
-            <div className="flex">
-                <form noValidate onSubmit={executeConfirmSignUp}>
-                    <div>
-                        <label htmlFor="username">メールアドレス: </label>
-                        <input
-                            id="username"
-                            type="email"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
-                    <button type="submit">登録</button>
-                </form>
-            </div>
+            <button onClick={handleResendCode}>検証コードを再送</button>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    ユーザー名:
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </label>
+                <label>
+                    検証コード:
+                    <input
+                        type="text"
+                        value={verificationCode}
+                        onChange={(e) => setVerificationCode(e.target.value)}
+                    />
+                </label>
+                <button type="submit">サインアップを確認</button>
+            </form>
         </>
     )
 }
 
-export default AwsConfirmSignUpForm;
+export default VerificationForm;

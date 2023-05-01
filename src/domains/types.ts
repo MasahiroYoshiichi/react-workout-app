@@ -1,23 +1,24 @@
 import {COURSE_CODE} from './constants';
 
-export interface CourseType {
+export type CourseType = {
     courseId: typeof COURSE_CODE[number];
     title: string;
     text: string;
     image: string;
 }
 
-export interface EventDetail {
+export type EventDetail =  {
     title: string;
     text: string;
     date: Date;
 }
 
-export interface UseAuth  {
+export type UseAuth = {
     isLoading: boolean;
     isAuthenticated: boolean;
     username: string;
-    signUp: (username: string, password: string) => Promise<Result>;
+    signUp: (username: string, email: string, password: string, formattedPhoneNumber: string) => Promise<Result>;
+    sendVerificationCode: (username: string) => Promise<Result>;
     confirmSignUp: (verificationCode: string) => Promise<Result>;
     signIn: (username: string, password: string) => Promise<Result>;
     signOut: () => void;
@@ -25,4 +26,20 @@ export interface UseAuth  {
 interface Result {
     success: boolean;
     message: string;
+}
+
+export type navbar = {
+    navTitle: string,
+    navLink: string
+}
+
+export type top = {
+    title: string,
+    buttonTitle: string,
+    image: string
+}
+
+export type countryType = {
+    value: string;
+    label: string;
 }

@@ -1,6 +1,6 @@
 import type {CourseType} from 'domains';
 
-export const courseDate: CourseType[] = [{
+export const courseData: CourseType[] = [{
     courseId: 'athlete',
     title: 'AthleteCourse',
     text: "このコースでは、高負荷かつ持久力が鍛えられるトレーニングを提供しています。 スポーツをされている方や日常的にトレーニングをされている方にお薦めできます。 内容はウエイトトレーニングと自重トレーニングをミックスした、 ハイブリッドトレーニングになります。 あなたのトレーニングに新たな刺激を与えてくれることでしょう。 さぁ!アスリートコースで新たな肉体、能力を手に入れましょう!",

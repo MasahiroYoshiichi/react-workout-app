@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {Navigate, useParams} from "react-router-dom";
-import {courseDate} from 'date';
+import {courseData} from 'data';
 import {COURSE_CODE} from 'domains';
 import Athlete from "../organisms/Athlete";
 import Exercise from "../organisms/Exercise";
@@ -11,7 +11,7 @@ const SelectCourse: FC = () => {
     const {courseID = ''} = useParams();
 
     if (COURSE_CODE.includes(courseID as never)) {
-        const course = courseDate.filter((course) => course.courseId === courseID);
+        const course = courseData.filter((course) => course.courseId === courseID);
         const selectCourse = course[0];
 
         return (
