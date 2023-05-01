@@ -1,16 +1,26 @@
-import {useEffect, useState } from 'react';
+import {FC, createContext, useContext, useEffect, useState, PropsWithChildren} from 'react';
 import {Amplify, Auth} from 'aws-amplify';
 import AwsConfigAuth from '../aws-config/auth';
 import {UseAuth} from "../domains";
 Amplify.configure({ Auth: AwsConfigAuth });
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+export const authContext = createContext({} as UseAuth);
+export const ProvideAuth: FC<PropsWithChildren> = ({children}) => {
+    const auth = useProvideAuth();
+
+    return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+};
+export const useAuth = (): UseAuth => {
+    return useContext(authContext);
+};
+
 
 export const useProvideAuth = (): UseAuth => {
     const [isLoading, setIsLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-
 
     const signUp = async (username: string, password: string) => {
         try {

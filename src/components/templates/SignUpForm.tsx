@@ -1,15 +1,15 @@
 import type {FC} from "react";
-import AwsSignInForm from "../ecosystems/AwsSignInForm";
+import AwsSignUpForm from "../ecosystems/AwsSignUpFrom";
 import Header from "../molecules/Header";
 
 
-const SignInForm: FC = () => {
+const SignUpForm: FC = () => {
     return (
         <div className="w-screen h-screen">
             <Header></Header>
-            <AwsSignInForm></AwsSignInForm>
+            <AwsSignUpForm></AwsSignUpForm>
         </div>
     )
 };
 
-export default SignInForm;
+export default SignUpForm;
