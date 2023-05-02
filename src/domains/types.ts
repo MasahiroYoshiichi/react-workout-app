@@ -18,7 +18,7 @@ export type UseAuth = {
     isAuthenticated: boolean;
     username: string;
     signUp: (username: string, email: string, password: string, formattedPhoneNumber: string) => Promise<Result>;
-    sendVerificationCode: (username: string) => Promise<Result>;
+    sendVerificationCode: () => Promise<Result>;
     confirmSignUp: (verificationCode: string) => Promise<Result>;
     signIn: (username: string, password: string) => Promise<Result>;
     signOut: () => void;

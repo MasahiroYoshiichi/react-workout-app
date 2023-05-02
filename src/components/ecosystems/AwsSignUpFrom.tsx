@@ -1,9 +1,10 @@
-import type { FC } from 'react';
+import type {FC} from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import parsePhoneNumberFromString from "libphonenumber-js";
-import Select from "react-select";
+import Select, {SingleValue} from "react-select";
 import {countryData} from "../../data/countryData";
+import {countryType} from "../../domains";
 import { useProvideAuth } from '../../hooks/useAuth';
 
 const AwsSignUpForm: FC = () => {
@@ -13,7 +14,18 @@ const AwsSignUpForm: FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [selectedCountryCode, setSelectedCountryCode] = useState(countryData[0])
+    const [selectedCountryCode, setSelectedCountryCode] = useState<countryType>(countryData[0]);
+
+    const handleChange = (newValue: SingleValue<countryType>) => {
+        if (newValue) {
+            setSelectedCountryCode(newValue);
+        }
+    };
+
+    const setPhoneNumberFromString = (value: string) => {
+        const digits = value.replace(/\D/g, '');
+        setPhoneNumber(digits);
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -21,11 +33,11 @@ const AwsSignUpForm: FC = () => {
         const parsedPhoneNumber = parsePhoneNumberFromString(fullPhoneNumber);
 
         if (parsedPhoneNumber) {
-            const formattedPhoneNumber = parsedPhoneNumber.formatInternational();
-            const result = await auth.signUp(username, email, password, formattedPhoneNumber);
+            const formattedPhoneNumber = parsedPhoneNumber.format('E.164');
             console.log(formattedPhoneNumber)
+            const result = await auth.signUp(username, email, password, formattedPhoneNumber);
             if (result.success) {
-                navigate({ pathname: '/confirm' });
+                navigate({ pathname: '/verification'});
             } else {
                 alert(result.message);
             }
@@ -83,15 +95,15 @@ const AwsSignUpForm: FC = () => {
                         <div className="flex">
                             <Select
                                 value={selectedCountryCode}
-                                onChange={setSelectedCountryCode}
+                                onChange={handleChange}
                                 options={countryData}
                                 className="w-1/3"
                             />
                             <input
                                 id="phone-number"
-                                type="tel"
+                                type="text"
                                 value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                onChange={(e) => setPhoneNumberFromString(e.target.value)}
                                 className="shadow appearance-none border rounded w-2/3 py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline ml-2"
                             />
                         </div>

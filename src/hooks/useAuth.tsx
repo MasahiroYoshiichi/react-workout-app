@@ -1,6 +1,5 @@
 import { FC, createContext, useContext, useEffect, useState, PropsWithChildren } from 'react';
 import { Amplify, Auth } from 'aws-amplify';
-import { parsePhoneNumber } from 'libphonenumber-js';
 import AwsConfigAuth from '../aws-config/auth';
 import { UseAuth } from '../domains';
 
@@ -24,23 +23,20 @@ export const useProvideAuth = (): UseAuth => {
     const [isLoading, setIsLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
 
     const signUp = async (username: string, email: string, password: string, phoneNumber: string) => {
         try {
-            const parsedPhoneNumber = parsePhoneNumber(phoneNumber);
-            const e164PhoneNumber = parsedPhoneNumber.format('E.164');
-            console.log(e164PhoneNumber)
             await Auth.signUp({
                 username,
                 password,
                 attributes: {
                     email,
-                    phone_number: e164PhoneNumber,
+                    phone_number: phoneNumber,
                 },
             });
             setUsername(username);
-            setPassword(password);
+            localStorage.setItem('tempUsername', username);
+            localStorage.setItem('tempPassword', password);
 
             return {
                 success: true,
@@ -54,9 +50,16 @@ export const useProvideAuth = (): UseAuth => {
         }
     };
 
-    const sendVerificationCode = async (username: string) => {
+    const sendVerificationCode = async () => {
+        const storedUsername = localStorage.getItem('tempUsername');
+        if (storedUsername == null) {
+            return {
+                success: false,
+                message: 'ユーザー名が見つかりませんでした。',
+            };
+        }
         try {
-            await Auth.resendSignUp(username);
+            await Auth.resendSignUp(storedUsername);
 
             return {
                 success: true,
@@ -71,10 +74,20 @@ export const useProvideAuth = (): UseAuth => {
     };
 
     const confirmSignUp = async (verificationCode: string) => {
+        const storedUsername = localStorage.getItem('tempUsername');
+        const storedPassword = localStorage.getItem('tempPassword')
+        if (storedUsername == null || storedPassword == null) {
+            return {
+                success: false,
+                message: 'ユーザーかパスワードが設定されていません。',
+            };
+        }
+
         try {
-            await Auth.confirmSignUp(username, verificationCode);
-            const result = await signIn(username, password);
-            setPassword('');
+            await Auth.confirmSignUp(storedUsername, verificationCode);
+            const result = await signIn(storedUsername, storedPassword);
+            localStorage.removeItem('tempUsername');
+            localStorage.removeItem('tempPassword');
 
             return result;
         } catch (error) {
