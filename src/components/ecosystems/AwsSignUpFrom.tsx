@@ -2,7 +2,6 @@ import type {FC} from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import parsePhoneNumberFromString from "libphonenumber-js";
-import Select, {SingleValue} from "react-select";
 import {countryData} from "../../data/countryData";
 import {countryType} from "../../domains";
 import { useProvideAuth } from '../../hooks/useAuth';
@@ -16,17 +15,16 @@ const AwsSignUpForm: FC = () => {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [selectedCountryCode, setSelectedCountryCode] = useState<countryType>(countryData[0]);
 
-    const handleChange = (newValue: SingleValue<countryType>) => {
-        if (newValue) {
-            setSelectedCountryCode(newValue);
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const countryCode = countryData.find(option => option.value === event.target.value);
+        if (countryCode) {
+            setSelectedCountryCode(countryCode);
         }
     };
-
     const setPhoneNumberFromString = (value: string) => {
         const digits = value.replace(/\D/g, '');
         setPhoneNumber(digits);
     };
-
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const fullPhoneNumber = `${selectedCountryCode.value}${phoneNumber}`;
@@ -93,15 +91,22 @@ const AwsSignUpForm: FC = () => {
                             電話番号:
                         </label>
                         <div className="flex">
-                            <Select
-                                value={selectedCountryCode}
+                            <select
+                                value={selectedCountryCode.value}
                                 onChange={handleChange}
-                                options={countryData}
                                 className="w-1/3"
-                            />
+                                autoComplete="off"
+                            >
+                                {countryData.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
                             <input
                                 id="phone-number"
                                 type="text"
+                                autoComplete="off"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumberFromString(e.target.value)}
                                 className="shadow appearance-none border rounded w-2/3 py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline ml-2"

@@ -1,10 +1,12 @@
 import type {FC} from "react";
 import {useState} from "react"
 import {useNavigate} from "react-router-dom";
-import {useProvideAuth} from "../../hooks/useAuth";
+import {useAuth, useProvideAuth} from "../../hooks/useAuth";
 const AwsSignInForm: FC = () => {
 
     const auth = useProvideAuth();
+    const aws = useAuth()
+    console.log(aws)
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

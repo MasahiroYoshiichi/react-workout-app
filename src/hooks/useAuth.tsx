@@ -3,18 +3,14 @@ import { Amplify, Auth } from 'aws-amplify';
 import AwsConfigAuth from '../aws-config/auth';
 import { UseAuth } from '../domains';
 
-
 Amplify.configure({ Auth: AwsConfigAuth });
-
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 export const authContext = createContext({} as UseAuth);
-
 export const ProvideAuth: FC<PropsWithChildren> = ({ children }) => {
     const auth = useProvideAuth();
 
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 };
-
 export const useAuth = (): UseAuth => {
     return useContext(authContext);
 };
@@ -23,6 +19,9 @@ export const useProvideAuth = (): UseAuth => {
     const [isLoading, setIsLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState('');
+    // const [signUpUsername, setSignUpUsername] = useState('');
+    // const [signUpPassword, setSignUpPassword] = useState('');
+
 
     const signUp = async (username: string, email: string, password: string, phoneNumber: string) => {
         try {
@@ -34,9 +33,10 @@ export const useProvideAuth = (): UseAuth => {
                     phone_number: phoneNumber,
                 },
             });
-            setUsername(username);
             localStorage.setItem('tempUsername', username);
             localStorage.setItem('tempPassword', password);
+            // setSignUpUsername(username);
+            // setSignUpPassword(password);
 
             return {
                 success: true,
@@ -55,7 +55,7 @@ export const useProvideAuth = (): UseAuth => {
         if (storedUsername == null) {
             return {
                 success: false,
-                message: 'ユーザー名が見つかりませんでした。',
+                message: 'ユーザーが設定されていません。',
             };
         }
         try {
@@ -63,7 +63,7 @@ export const useProvideAuth = (): UseAuth => {
 
             return {
                 success: true,
-                message: '',
+                message: 'コードの送信に成功しました。'
             };
         } catch (error) {
             return {
@@ -147,6 +147,8 @@ export const useProvideAuth = (): UseAuth => {
         isLoading,
         isAuthenticated,
         username,
+        // signUpUsername,
+        // signUpPassword,
         signUp,
         sendVerificationCode,
         confirmSignUp,

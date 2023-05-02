@@ -1,31 +1,37 @@
 import type { FC } from "react";
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom";
 import {useProvideAuth} from "../../hooks/useAuth";
 
 const AwsVerificationForm: FC = () => {
     const auth = useProvideAuth();
+    const navigate = useNavigate()
     const [verificationCode, setVerificationCode] = useState("");
-    const [error, setError] = useState('');
+    const [error] = useState('');
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const result = await auth.confirmSignUp(verificationCode);
-
-        if (!result.success) {
-            setError(result.message);
+        if (result.success) {
+            navigate({pathname: '/dashboard'})
+        } else{
+            alert(result.message);
         }
     };
 
     const handleResendCode = async () => {
         const result = await auth.sendVerificationCode();
         console.log(auth.username)
-        if (!result.success) {
-            setError(result.message);
+        if (result.success) {
+            alert(result.message)
+        } else {
+            alert(result.message)
         }
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4">
+
+        <div className="flex justify-center min-h-screen">
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
                 <form onSubmit={handleSubmit}>
                     <h2 className="text-center text-2xl font-semibold mb-4">Verify Account</h2>
@@ -39,7 +45,7 @@ const AwsVerificationForm: FC = () => {
                         <input
                             type="text"
                             id="verificationCode"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="Verification Code"
                             value={verificationCode}
                             onChange={(e) => setVerificationCode(e.target.value)}
