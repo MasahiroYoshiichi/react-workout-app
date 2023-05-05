@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { nav } from "../../data";
+import { nav } from "../../domains/auth_front/data";
 
 const Headar: FC = () => {
     return (

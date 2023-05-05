@@ -1,14 +1,14 @@
 import type {FC} from "react";
 import {useEffect} from "react";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
-import Home from "components/templates/Home";
-import AllCourse from "../components/ecosystems/AllCourse";
-import SelectCourse from "../components/ecosystems/SelectCourse";
-import Course from "../components/templates/Course";
-import SignInForm from "../components/templates/SiginInForm";
-import SignUpForm from "../components/templates/SignUpForm";
-import VerificationForm from "../components/templates/VerificationForm";
-import {useAuth} from "../hooks/useAuth";
+import Home from "domains/top_page/features/components/templates/Home";
+import SignInForm from "../domains/auth_front/features/cognito/components/templates/SiginInForm";
+import SignUpForm from "../domains/auth_front/features/cognito/components/templates/SignUpForm";
+import VerificationForm from "../domains/auth_front/features/cognito/components/templates/VerificationForm";
+import {useAuth} from "../domains/auth_front/features/cognito/hooks/useAuth";
+import AllCourse from "../domains/course_selects/features/components/ecosystem/AllCourse";
+import SelectCourse from "../domains/course_selects/features/components/ecosystem/SelectCourse";
+import Course from "../domains/course_selects/features/components/templates/Course";
 
 
 

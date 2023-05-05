@@ -1,0 +1,1 @@
+export const COURSE_CODE = ['athlete', 'exercise', 'fitness'] as const;

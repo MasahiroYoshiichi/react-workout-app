@@ -2,7 +2,7 @@ import type {FC, PropsWithChildren} from "react";
 import {BrowserRouter as Router} from "react-router-dom";
 import {HelmetProvider} from "react-helmet-async";
 import {SWRConfig} from "swr";
-import {ProvideAuth} from "hooks/useAuth";
+import {ProvideAuth} from "domains/auth_front/features/cognito/hooks/useAuth";
 
 const swrOptions = {
     suspense: true,

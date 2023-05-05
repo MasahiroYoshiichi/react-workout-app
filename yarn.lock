@@ -4299,6 +4299,11 @@ dom-helpers@^5.0.1:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
 
+domains@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/domains/-/domains-1.1.4.tgz#021e5bfb211fd7807ce64234524f090610cefbc9"
+  integrity sha512-kk5jtFmTOd2n6OGcUHZw9rWCoxPSewcwY590xPVq/nWN7deLzNBuB0YYgBdAbV1uC4t6LGGX4tWkOz3WIw6xjw==
+
 eastasianwidth@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/eastasianwidth/-/eastasianwidth-0.2.0.tgz"
