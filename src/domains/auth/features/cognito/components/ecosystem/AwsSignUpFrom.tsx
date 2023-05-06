@@ -2,8 +2,8 @@ import type {FC} from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import parsePhoneNumberFromString from "libphonenumber-js";
-import {countryData} from "domains/auth_front/data";
-import {countryType} from "domains/auth_front/types";
+import {countryData} from "domains/auth/data";
+import {countryType} from "domains/auth/types";
 import { useProvideAuth } from '../../hooks/useAuth';
 
 const AwsSignUpForm: FC = () => {

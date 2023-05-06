@@ -1,7 +1,7 @@
 import { FC, createContext, useContext, useEffect, useState, PropsWithChildren } from 'react';
 import { Amplify, Auth } from 'aws-amplify';
-import AwsConfigAuth from 'domains/auth_front/config/auth';
-import { UseAuth } from 'domains/auth_front/types';
+import AwsConfigAuth from 'domains/auth/config/auth';
+import { UseAuth } from 'domains/auth/types';
 
 Amplify.configure({ Auth: AwsConfigAuth });
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

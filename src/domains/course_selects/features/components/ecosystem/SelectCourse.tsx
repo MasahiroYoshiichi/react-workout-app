@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {Navigate, useParams} from "react-router-dom";
-import {courseData} from 'domains/auth_front/data';
+import {courseData} from 'domains/auth/data';
 import {COURSE_CODE} from 'domains/course_selects/constants';
 import Athlete from "../organisms/Athlete";
 import Exercise from "../organisms/Exercise";
