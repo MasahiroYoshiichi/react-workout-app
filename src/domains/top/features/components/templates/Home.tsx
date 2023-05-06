@@ -1,15 +1,16 @@
 import type {FC} from "react";
-import {Outlet} from "react-router-dom";
+import {Helmet} from "react-helmet-async";
 import Header from "../../../../../common/features/components/organism/Header";
+import Top from "../organism/Top";
 
-const Course: FC = () => {
-
+const Home: FC = () => {
     return (
         <div className="w-screen h-screen">
+            <Helmet>{import.meta.env.VITE_APP_TITLE}</Helmet>
             <Header></Header>
-            <Outlet/>
+            <Top></Top>
         </div>
     )
 };
 
-export default Course;
+export default Home;

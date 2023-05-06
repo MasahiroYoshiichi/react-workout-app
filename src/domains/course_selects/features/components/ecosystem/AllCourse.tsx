@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {Helmet} from "react-helmet-async";
-import {courseData} from 'domains/auth_front/data';
+import {courseData} from '../../../data/courseData';
 import Athlete from "../organisms/Athlete";
 import Exercise from "../organisms/Exercise";
 import Fitness from "../organisms/Fitness";
