@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { SignInForm } from "../../../../types";
+import { SignInForm } from "../../../../types/signin";
 
 const SignInform: FC<SignInForm> = (SignInForm) => {
     return (

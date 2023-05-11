@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
+import {useNavigate} from "react-router-dom";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { handleSignUp } from "domains/auth/api/auth";
-import {CountryInfo, SignUpInfo} from "domains/auth/types";
+import {CountryInfo, SignUpInfo} from "domains/auth/types/signup";
 import {countryData} from "../../../../data/countryData";
 import SignupForm from "../organism/SignUpForm";
 
@@ -12,6 +13,7 @@ const HandleSignUp: FC = () => {
     const [email, setEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [countryCode, setCountryCode] = useState<CountryInfo>(countryData[0])
+    const navigate = useNavigate();
 
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) =>{
         const countryCode = countryData.find(label => label.value === event.target.value);
@@ -41,6 +43,7 @@ const HandleSignUp: FC = () => {
             try {
                 await handleSignUp(authInfo);
                 alert("サインアップに成功しました。");
+                navigate({pathname: "/confirm"})
             } catch (error) {
                 alert("サインアップに失敗しました。");
                 console.log(error);

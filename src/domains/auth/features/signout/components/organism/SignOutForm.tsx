@@ -1,5 +1,5 @@
 import {FC} from "react";
-import { SignOutForm } from "../../../../types";
+import { SignOutForm } from "../../../../types/signout";
 
 const SignOutFormComponent: FC<SignOutForm> = (SignOutForm) => {
     return (

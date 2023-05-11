@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Home from "domains/top/features/components/templates/Home";
 import ConfirmPage from "../domains/auth/features/confirm-signup/components/templates/ConfirmPage";
+import MFASignInPage from "../domains/auth/features/mfa-signin/components/templates/MFASignInPage";
 import SignInPage from "../domains/auth/features/signin/components/templates/SignInPage";
 import HandleSignOut from "../domains/auth/features/signout/components/ecosystem/HandleSignOut";
 import SignUpPage from "../domains/auth/features/signup/components/templates/SignUpPage";
@@ -29,6 +30,7 @@ const IndexRoutes: FC = () => {
                 <Route path=":courseID" element={<SelectCourse/>}/>
             </Route>
             <Route path="signin" element={<SignInPage/>}/>
+            <Route path="mfa" element={<MFASignInPage/>}/>
             <Route path="signup" element={<SignUpPage/>}/>
             <Route path="confirm" element={<ConfirmPage/>}/>
             <Route path="signout" element={<HandleSignOut/>}/>

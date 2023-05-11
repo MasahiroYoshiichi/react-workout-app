@@ -1,6 +1,6 @@
 import { FC } from "react";
 import {countryData} from "../../../../data/countryData";
-import { SignUpForm } from "../../../../types";
+import { SignUpForm } from "../../../../types/signup";
 
 const SignupForm: FC<SignUpForm> = (SignUpForm) => {
     return (

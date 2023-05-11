@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import { handleSignOut } from 'domains/auth/api/auth';
-import { SignOutInfo } from "domains/auth/types";
+import { SignOutInfo } from "domains/auth/types/signout";
 import SignOutForm from "../organism/SignOutForm";
 
 
