@@ -1,23 +1,37 @@
 import { FC } from "react";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import {confirmSignUpSchema, yupConfirmSignUpForm} from "../../../../schema/confirmSignUpForm";
 import { ConfirmSignUpForm } from "../../../../types/confirm";
 
-const ConfirmForm: FC<ConfirmSignUpForm> = (ConfirmSignUpForm) => {
+const ConfirmForm: FC<ConfirmSignUpForm> = ({onConfirmClick}) => {
+    const {register, handleSubmit, formState: {errors}} = useForm<confirmSignUpSchema>({
+        defaultValues: {
+            confirmationCode: "",
+        },
+        resolver: yupResolver(yupConfirmSignUpForm)
+        }
+    )
+
     return (
-        <div className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(onConfirmClick)}>
             <input
                 className="border border-gray-300 rounded-md p-2 w-full"
                 type="text"
                 placeholder="確認コード"
-                value={ConfirmSignUpForm.confirmationCode}
-                onChange={(e) => ConfirmSignUpForm.onConfirmationCodeChange(e.target.value)}
+                {...register("confirmationCode")}
+                onChange={(e) =>{
+                    e.target.value = e.target.value.replace(/\D/g, '')}
+                }
             />
+            {errors.confirmationCode && <p className="text-red-500">{errors.confirmationCode.message}</p> }
             <button
                 className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
-                onClick={ConfirmSignUpForm.onConfirmClick}
+                type="submit"
             >
                 確認コードを送信
             </button>
-        </div>
+        </form>
     );
 };
 

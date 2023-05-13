@@ -9,6 +9,7 @@ const swrOptions = {
     dedupingInterval: 60000,
     shouldRetryOnError: false,
 };
+
 const Index: FC<PropsWithChildren> = ({children}) => (
     <HelmetProvider>
             <Router>

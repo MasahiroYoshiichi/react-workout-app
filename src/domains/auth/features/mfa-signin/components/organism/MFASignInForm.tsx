@@ -1,23 +1,36 @@
 import { FC } from "react";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import {MFASignInSchema, yupMFASignInForm} from "../../../../schema/mfaSignInform";
 import {MFAForm} from "../../../../types/mfa";
 
-const MFASignInForm: FC<MFAForm> = (MFAForm) => {
+const MFASignInForm: FC<MFAForm> = ({onMFASignInClick}) => {
+    const {register, handleSubmit, formState: {errors}} = useForm<MFASignInSchema>({
+        defaultValues: {
+            MFACode: ""
+        },
+        resolver: yupResolver(yupMFASignInForm)
+    })
+
     return (
-        <div className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(onMFASignInClick)}>
             <input
                 className="border border-gray-300 rounded-md p-2 w-full"
                 type="text"
                 placeholder="確認コード"
-                value={MFAForm.MFACode}
-                onChange={(e) => MFAForm.onMFACodeChange(e.target.value)}
+                {...register("MFACode")}
+                onChange={(e) => {
+                    e.target.value = e.target.value.replace(/\D/g, '')}
+                }
             />
+            {errors.MFACode && <p className="text-red-500">{errors.MFACode.message}</p> }
             <button
                 className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
-                onClick={MFAForm.onMFASignInClick}
+                type="submit"
             >
                 確認コードを送信
             </button>
-        </div>
+        </form>
     );
 };
 

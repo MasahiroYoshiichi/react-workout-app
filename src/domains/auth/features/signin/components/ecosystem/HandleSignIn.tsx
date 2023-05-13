@@ -1,25 +1,23 @@
-import { FC, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { FC} from "react";
+import { useNavigate } from "react-router-dom";
 import { handleSignIn } from "../../../../api/auth";
+import {signinFormSchema} from "../../../../schema/signInForm";
 import { SignInInfo } from "../../../../types/signin";
 import SignInform from "../organism/SignInform";
 
 const HandleSignIn: FC = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const authInfo: SignInInfo = {
-        email,
-        password,
-    };
-
-    const signIn = async () => {
+    const signIn = async (data: signinFormSchema) => {
+        const authInfo: SignInInfo = {
+            email: data.email,
+            password: data.password,
+        };
         try {
             await handleSignIn(authInfo);
             alert("サインインに成功しました。");
-            navigate({pathname: "/mfa"})
-
+            sessionStorage.setItem("allow", "true")
+            navigate({ pathname: "/mfa" });
         } catch (error) {
             alert("サインインに失敗しました。");
             console.log(error);
@@ -28,13 +26,7 @@ const HandleSignIn: FC = () => {
 
     return (
         <div className="bg-white w-1/4 p-10 rounded-xl shadow-md">
-            <SignInform
-                email={email}
-                password={password}
-                onEmailChange={setEmail}
-                onPasswordChange={setPassword}
-                onSingInClick={signIn}
-            />
+            <SignInform onSignInClick={signIn} />
         </div>
     );
 };

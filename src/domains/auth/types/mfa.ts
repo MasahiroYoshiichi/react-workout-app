@@ -1,13 +1,11 @@
+import {MFASignInSchema} from "../schema/mfaSignInform";
+
 export type MFAInfo = {
-    email: string,
-    session: string,
     MFACode: string
 }
 
 export type MFAForm = {
-    MFACode: string,
-    onMFACodeChange: (value: string) => void;
-    onMFASignInClick: () => void;
+    onMFASignInClick: (value: MFASignInSchema) => void;
 }
 
 export type MFAResponse = {

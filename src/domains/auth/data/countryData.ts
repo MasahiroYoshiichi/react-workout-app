@@ -1,4 +1,4 @@
-import type {CountryInfo} from '../types';
+import type {CountryInfo} from 'domains/auth/types/signup';
 
 export const countryData: CountryInfo[] = [{
     value: '+1',
@@ -7,10 +7,10 @@ export const countryData: CountryInfo[] = [{
     value: '+33',
     label: 'France'
 },{
-    value: '+44',
+    value: '+81',
     label: 'Japan'
 },{
-    value: '+81',
+    value: '+44',
     label: 'Great Britain'
 },{
     value: '+86',

@@ -1,14 +1,12 @@
+import {signinFormSchema} from "../schema/signInForm";
+
 export type SignInInfo = {
     email: string;
     password: string;
 }
 export type SignInForm = {
-    email: string;
-    password: string;
-    onEmailChange: (value: string) => void;
-    onPasswordChange: (value: string) => void;
-    onSingInClick: () => void;
-}
+    onSignInClick: (value: signinFormSchema) => void;
+};
 
 export type SignInResponse = {
     session: string;

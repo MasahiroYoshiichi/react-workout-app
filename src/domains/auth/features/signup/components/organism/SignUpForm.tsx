@@ -1,36 +1,50 @@
-import { FC } from "react";
+import {FC} from "react";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
 import {countryData} from "../../../../data/countryData";
-import { SignUpForm } from "../../../../types/signup";
+import {signUpFormSchema, yupSignUpForm} from "../../../../schema/signUpForm";
+import {SignUpForm} from "../../../../types/signup";
 
-const SignupForm: FC<SignUpForm> = (SignUpForm) => {
+const SignupForm: FC<SignUpForm> = ({onSignUpClick}) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<signUpFormSchema>({
+        defaultValues: {
+            username: "",
+            password: "",
+            email:  "",
+            countryCode: countryData[2].value,
+            phoneNumber: ""
+        },
+        resolver: yupResolver(yupSignUpForm),
+    });
+
     return (
-        <div className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit(onSignUpClick)}>
             <input
                 className="border border-gray-300 rounded-md p-2 w-full"
                 type="text"
                 placeholder="ユーザー名"
-                value={SignUpForm.username}
-                onChange={(e) => SignUpForm.onUsernameChange(e.target.value)}
+                {...register("username")}
             />
+            {errors.username && <p className="text-red-500">{errors.username.message}</p> }
             <input
                 className="border border-gray-300 rounded-md p-2 w-full"
                 type="password"
+                autoComplete="off"
                 placeholder="パスワード"
-                value={SignUpForm.password}
-                onChange={(e) => SignUpForm.onPasswordChange(e.target.value)}
+                {...register("password")}
             />
+            {errors.password && <p className="text-red-500">{errors.password.message}</p> }
             <input
                 className="border border-gray-300 rounded-md p-2 w-full"
                 type="email"
                 placeholder="メールアドレス"
-                value={SignUpForm.email}
-                onChange={(e) => SignUpForm.onEmailChange(e.target.value)}
+                {...register("email")}
             />
+            {errors.email && <p className="text-red-500">{errors.email.message}</p> }
             <select
-                value={SignUpForm.countryCode.value}
-                onChange={(e) => SignUpForm.onCountryChange(e)}
                 autoComplete="off"
                 className="border border-gray-300 rounded-md p-2 w-1/4"
+                {...register("countryCode")}
             >
                 {countryData.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -42,16 +56,21 @@ const SignupForm: FC<SignUpForm> = (SignUpForm) => {
                 className="border border-gray-300 rounded-md p-2 w-3/4"
                 type="tel"
                 placeholder="電話番号"
-                value={SignUpForm.phoneNumber}
-                onChange={(e) => SignUpForm.onPhoneNumberChange(e.target.value)}
+                autoComplete="off"
+                {...register("phoneNumber")}
+                onChange={(e) => {
+                    e.target.value = e.target.value.replace(/\D/g, '');
+                }}
             />
+            {errors.countryCode && <p className="text-red-500">{errors.countryCode.message}</p> }
+            {errors.phoneNumber && <p className="text-red-500">{errors.phoneNumber.message}</p> }
             <button
                 className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
-                onClick={SignUpForm.onSignUpClick}
+                type="submit"
             >
                 サインアップ
             </button>
-        </div>
+        </form>
     );
 };
 

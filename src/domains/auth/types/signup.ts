@@ -1,4 +1,4 @@
-import React from "react";
+import {signUpFormSchema} from "../schema/signUpForm";
 
 export type SignUpInfo = {
     username: string;
@@ -14,17 +14,7 @@ export type CountryInfo = {
 
 
 export type SignUpForm = {
-    username: string;
-    password: string;
-    email: string;
-    phoneNumber: string;
-    countryCode: CountryInfo;
-    onUsernameChange: (value: string) => void;
-    onPasswordChange: (value: string) => void;
-    onEmailChange: (value: string) => void;
-    onCountryChange: (value: React.ChangeEvent<HTMLSelectElement>) => void;
-    onPhoneNumberChange: (value: string) => void;
-    onSignUpClick: () => void;
+    onSignUpClick: (value: signUpFormSchema) => void;
 }
 
 

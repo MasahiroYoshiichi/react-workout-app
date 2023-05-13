@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ConfirmSignUpInfo } from "../types/confirm";
 import { MFAInfo, MFAResponse} from "../types/mfa";
 import { SignInInfo} from "../types/signin";
-import { SignOutInfo, SignOutResponce } from "../types/signout";
+import { SignOutInfo} from "../types/signout";
 import { SignUpInfo} from "../types/signup";
 
 const apiBaseUrl = "/api";
@@ -29,7 +29,7 @@ export const handleSignUp = async (authInfo: SignUpInfo): Promise<void> => {
 };
 
 export const handleConfirmSignUp = async (authInfo: ConfirmSignUpInfo): Promise<void> => (
-       await apiClient.post('/confirm-signup', authInfo)
+    await apiClient.post('/confirm-signup', authInfo)
 );
 
 export const handleSignIn = async (authInfo: SignInInfo): Promise<void> => {
@@ -45,13 +45,6 @@ export const HandleMFA = async (authinfo: MFAInfo): Promise<MFAResponse> => {
         return responce.data;
 }
 
-export const handleSignOut = async (authInfo: SignOutInfo): Promise<SignOutResponce> => {
-        const response = await apiClient.post('/signout', authInfo);
-
-        if (response.status === 200) {
-                localStorage.removeItem('accessToken');
-                localStorage.removeItem('decodedToken');
-        }
-
-        return response;
+export const handleSignOut = async (authInfo: SignOutInfo): Promise<void> => {
+        await apiClient.post('/signout', authInfo);
 };
