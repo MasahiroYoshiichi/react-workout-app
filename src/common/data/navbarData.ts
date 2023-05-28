@@ -16,7 +16,7 @@ export const nav: navbar[] = [
     {
         navTitle: '新規登録',
         navLink: '/signup',
-    },
+    }
 
 ]
 

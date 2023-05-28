@@ -4,7 +4,6 @@ import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-do
 import ConfirmPage from "../domains/auth/features/confirm-signup/components/templates/ConfirmPage";
 import MFASignInPage from "../domains/auth/features/mfa-signin/components/templates/MFASignInPage";
 import SignInPage from "../domains/auth/features/signin/components/templates/SignInPage";
-import HandleSignOut from "../domains/auth/features/signout/components/ecosystem/HandleSignOut";
 import SignUpPage from "../domains/auth/features/signup/components/templates/SignUpPage";
 import AllCourse from "../domains/course_selects/features/components/ecosystem/AllCourse";
 import SelectCourse from "../domains/course_selects/features/components/ecosystem/SelectCourse";
@@ -26,8 +25,8 @@ const IndexRoutes: FC = () => {
         }
     }, [navigate, hash, pathname]);
 
-    const accessToken = localStorage.getItem("accessToken")
-    if (accessToken != null) {
+    const auth = localStorage.getItem("authentication")
+    if (auth != null) {
         return (
             <Routes>
                 <Route path="/" element={<CourseSelectPage/>} />
@@ -46,7 +45,6 @@ const IndexRoutes: FC = () => {
                 <Route path="mfa" element={<MFASignInPage/>}/>
                 <Route path="signup" element={<SignUpPage/>}/>
                 <Route path="confirm" element={<ConfirmPage/>}/>
-                <Route path="signout" element={<HandleSignOut/>}/>
                 <Route path="*" element={<Navigate to="/" replace/>}/>
             </Routes>
         )

@@ -10,4 +10,5 @@ export type MFAForm = {
 
 export type MFAResponse = {
     accessToken: string
+    authentication: string
 }
